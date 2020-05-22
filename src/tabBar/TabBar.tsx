@@ -113,9 +113,9 @@ export default class extends React.Component<ScreenProps> {
         <ActionButton
           title="Learn"
           width={100}
-          fillColor={tab === 'MAIN_SCREEN' ? theme.lightBlue : "white"}
+          fillColor={tab === 'LEARN_SCREEN' ? theme.lightBlue : "white"}
           textColor={
-            tab === 'MAIN_SCREEN' ? theme.darkBlue : theme.veryLightText
+            tab === 'LEARN_SCREEN' ? theme.darkBlue : theme.veryLightText
           }
           style={{
             marginHorizontal: 4,
@@ -125,7 +125,7 @@ export default class extends React.Component<ScreenProps> {
           }}
           onPress={() => {
             haptic.impact(Haptic.ImpactFeedbackStyle.Light);
-            navigation.navigate('MAIN_SCREEN');
+            navigation.navigate('LEARN_SCREEN');
           }}
         />
       </View>
