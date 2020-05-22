@@ -1,13 +1,23 @@
 import React from 'react';
+import { createAppContainer } from "react-navigation";
 import { StyleSheet, Text, View } from 'react-native';
+import { createBottomTabNavigator } from 'react-navigation-tabs';
+import SettingScreen from './src/settings';
+import MainScreen from './src/main';
+import TabBar from './src/tabBar/TabBar';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Testing 123!</Text>
-    </View>
-  );
-}
+const App = createBottomTabNavigator(
+  {
+    'MAIN_SCREEN': MainScreen,
+    'SETTING_SCREEN': SettingScreen,
+  },
+  {
+    initialRouteName: 'MAIN_SCREEN',
+    tabBarComponent: (props: any) => {
+      return <TabBar {...props} />;
+    },
+  }
+);
 
 const styles = StyleSheet.create({
   container: {
@@ -17,3 +27,5 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+
+export default createAppContainer(App)
