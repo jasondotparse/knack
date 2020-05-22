@@ -1,8 +1,13 @@
-import React from 'react';
-import { Text } from 'react-native';
+import { createStackNavigator } from 'react-navigation-stack';
+import ArticleScreen from './ArticleScreen';
+import LearnScreen from './LearnScreen';
 
-const Learn = () => (
-  <Text>this is the Learn screen</Text>
-)
-
-export default Learn;
+export default createStackNavigator(
+  {
+    'ARTICLE_SCREEN': ArticleScreen,
+    'INDEX_LEARN_SCREEN': LearnScreen,
+  },
+  {
+    initialRouteName: 'INDEX_LEARN_SCREEN',
+  }
+);

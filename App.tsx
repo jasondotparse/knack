@@ -11,7 +11,7 @@ const App = createBottomTabNavigator(
   {
     'MAIN_SCREEN': MainScreen,
     'SETTING_SCREEN': SettingScreen,
-    'LEARN_SCREEN': LearnScreen,
+    'LEARN_SCREEN': LearnScreen
   },
   {
     initialRouteName: 'MAIN_SCREEN',
