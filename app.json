@@ -22,7 +22,11 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "icon": "./assets/ios.png"
+    },
+    "android": {
+      "icon": "./assets/android.png"
     }
   }
 }

@@ -6,12 +6,14 @@ import SettingScreen from './src/settings';
 import MainScreen from './src/main';
 import LearnScreen from './src/learn';
 import TabBar from './src/tabBar/TabBar';
+import MarkdownArticleScreen from './src/articles/MarkdownArticleScreen'
 
 const App = createBottomTabNavigator(
   {
     'MAIN_SCREEN': MainScreen,
     'SETTING_SCREEN': SettingScreen,
-    'LEARN_SCREEN': LearnScreen
+    'LEARN_SCREEN': LearnScreen,
+    'MARKDOWN_ARTICLE_SCREEN': MarkdownArticleScreen,
   },
   {
     initialRouteName: 'MAIN_SCREEN',

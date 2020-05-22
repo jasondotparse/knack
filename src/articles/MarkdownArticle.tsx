@@ -86,11 +86,11 @@ export default class MarkdownArticle extends React.Component<
     });
   };
 
-  _rightFlicker: NodeJS.Timeout;
+  // _rightFlicker: NodeJS.Timeout;
 
   componentDidMount() {
     this.flickerRightFlasher();
-    this._rightFlicker = setInterval(this.flickerRightFlasher, 800);
+    // this._rightFlicker = setInterval(this.flickerRightFlasher, 800);
   }
 
   onNext = () => {

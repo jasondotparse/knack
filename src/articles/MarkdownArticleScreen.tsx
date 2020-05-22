@@ -1,11 +1,9 @@
 import React from "react";
 import ScreenProps from "../ScreenProps";
-import { THOUGHT_SCREEN } from "../main/screens";
 import MarkdownArticle from "./MarkdownArticle";
 import { NavigationEventCallback } from "react-navigation";
 import { get } from "lodash";
 import { FadesIn } from "../animations";
-import { INDEX_LEARN_SCREEN } from "../learn/screens";
 import { StatusBar } from "react-native";
 
 export default class MarkdownArticleScreen extends React.Component<
@@ -21,7 +19,7 @@ export default class MarkdownArticleScreen extends React.Component<
   }
 > {
   static navigationOptions = {
-    header: null,
+    // header: null,
   };
 
   state = {
@@ -30,7 +28,7 @@ export default class MarkdownArticleScreen extends React.Component<
     pages: [],
     title: "",
     description: "",
-    nextScreen: INDEX_LEARN_SCREEN,
+    nextScreen: 'INDEX_LEARN_SCREEN',
     shouldHideExitButton: false,
   };
 
@@ -52,7 +50,7 @@ export default class MarkdownArticleScreen extends React.Component<
     const nextScreen = get(
       payload,
       "action.params.nextScreen",
-      INDEX_LEARN_SCREEN
+      'INDEX_LEARN_SCREEN'
     );
     const shouldHideExitButton = get(
       payload,

@@ -239,3 +239,61 @@ export const GhostButton = ({
     </Text>
   </TouchableOpacity>
 );
+
+export const Header = ({
+  children,
+  style,
+  allowFontScaling,
+}: ParentComponent & { allowFontScaling?: boolean }) => (
+  <Text
+    style={{
+      fontWeight: "900",
+      fontSize: 48,
+      color: theme.darkText,
+      marginBottom: 12,
+      ...style,
+    }}
+    textBreakStrategy={"simple"}
+    allowFontScaling={allowFontScaling}
+    maxFontSizeMultiplier={1}
+  >
+    {children}
+  </Text>
+);
+
+Header.propTypes = {
+  children: PropTypes.any.isRequired,
+  style: PropTypes.object,
+};
+
+export const GhostButtonWithGuts = ({
+  onPress,
+  borderColor,
+  disabled,
+  flex,
+  children,
+  style,
+}: {
+  onPress: () => void;
+  borderColor?: string;
+  disabled?: boolean;
+  flex?: number;
+  children: any;
+  style?: any;
+}) => (
+  <TouchableOpacity
+    style={{
+      padding: 12,
+      borderRadius: 10,
+      borderColor: borderColor || theme.lightGray,
+      borderWidth: 1,
+      borderBottomWidth: 2,
+      flex,
+      ...style,
+    }}
+    disabled={disabled}
+    onPress={onPress}
+  >
+    {children}
+  </TouchableOpacity>
+);
