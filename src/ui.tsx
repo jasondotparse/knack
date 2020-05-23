@@ -297,3 +297,115 @@ export const GhostButtonWithGuts = ({
     {children}
   </TouchableOpacity>
 );
+
+export const Label = ({ children, style }: { children: any; style?: any }) => (
+  <Text
+    style={{
+      fontWeight: "700",
+      fontSize: 18,
+      color: theme.veryLightText,
+      marginBottom: 12,
+      ...style,
+    }}
+  >
+    {children}
+  </Text>
+);
+
+export const Row = ({ children, style }: { children: any; style?: any }) => (
+  <View
+    style={{
+      flexDirection: "row",
+      justifyContent: "space-between",
+      ...style,
+    }}
+  >
+    {children}
+  </View>
+);
+
+Row.propTypes = {
+  children: PropTypes.any.isRequired,
+  style: PropTypes.object,
+};
+
+export const Container = ({ children, style }: ParentComponent) => (
+  <View
+    style={{
+      flexDirection: "column",
+      justifyContent: "flex-start",
+      paddingLeft: 24,
+      paddingRight: 24,
+      paddingBottom: 50,
+      ...style,
+    }}
+  >
+    {children}
+  </View>
+);
+
+Container.propTypes = {
+  children: PropTypes.any,
+};
+
+export const RoundedSelectorButton = ({
+  title,
+  selected = false,
+  onPress,
+}: {
+  title: string;
+  selected?: boolean;
+  onPress: () => void;
+}) => (
+  <TouchableOpacity
+    onPress={onPress}
+    style={{
+      backgroundColor: selected ? theme.blue : "white",
+      borderColor: selected ? theme.darkBlue : theme.lightGray,
+      borderBottomWidth: 2,
+      paddingTop: 12,
+      paddingBottom: 12,
+      paddingRight: 12,
+      borderRadius: 8,
+      borderWidth: 1,
+      marginBottom: 4,
+      marginTop: 1,
+      flexDirection: "row",
+      justifyContent: "space-between",
+    }}
+  >
+    <View style={{ flexDirection: "row" }}>
+      <Text
+        style={{
+          fontWeight: "700",
+          fontSize: 16,
+          color: selected ? "white" : theme.darkText,
+          marginLeft: 12,
+        }}
+      >
+        {title}
+      </Text>
+    </View>
+
+    {selected && <Feather name={"check"} size={16} color={"white"} />}
+  </TouchableOpacity>
+);
+
+export const B = ({ children, style }: { children: any; style?: any }) => (
+  <Text style={{ fontWeight: "bold", ...style }}>{children}</Text>
+);
+
+export const CapsLabel = ({ children, style }) => (
+  <Text
+    style={{
+      fontSize: 10,
+      fontWeight: "700",
+      color: theme.lightText,
+      letterSpacing: 1,
+      ...style,
+    }}
+  >
+    {children}
+  </Text>
+);
+
