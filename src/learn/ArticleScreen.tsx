@@ -9,7 +9,7 @@ import { get } from "lodash";
 
 export default class ArticleScreen extends React.Component<ScreenProps> {
   static navigationOptions = {
-    // header: null,
+    header: () => <></>
   };
 
   state = {

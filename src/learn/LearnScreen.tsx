@@ -26,6 +26,7 @@ import overgeneralization from "../articles/content/overgeneralization";
 import predictions from "../articles/content/predictions";
 import selfBlaming from "../articles/content/self-blaming";
 import shouldStatements from "../articles/content/should-statements";
+import { StackNavigationOptions } from "react-navigation-stack/lib/typescript/src/vendor/types";
 
 const ArticleWithImageCard = ({
   content,
@@ -68,9 +69,9 @@ const ArticleCard = ({
 );
 
 export default class LearnScreen extends React.Component<ScreenProps> {
-  static navigationOptions = {
-    // header: null,
-  };
+  static navigationOptions: StackNavigationOptions = {
+    header: () => <></>
+  }
 
   _openContent = (content: Content, nextScreen?: string) => {
     this.props.navigation.navigate('MARKDOWN_ARTICLE_SCREEN', {
