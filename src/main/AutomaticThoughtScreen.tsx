@@ -27,9 +27,9 @@ export default class AutomaticThoughtScreen extends React.Component<
     isEditing: boolean;
   }
 > {
-  // static navigationOptions = {
-  //   header: <></>,
-  // };
+  static navigationOptions = {
+    header: () => <></>,
+  };
 
   state = {
     thought: undefined,
@@ -105,6 +105,7 @@ export default class AutomaticThoughtScreen extends React.Component<
               </Row>
 
               <TextInput
+                style={{...textInputStyle, textAlignVertical: 'top'}}
                 placeholderTextColor={textInputPlaceholderColor}
                 placeholder={i18n.t("cbt_form.auto_thought_placeholder")}
                 // value={

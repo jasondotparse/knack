@@ -13,7 +13,6 @@ export const textInputStyle = {
   borderWidth: 1,
   borderBottomWidth: 2,
   color: theme.darkText,
-  textAlignVertical: "top",
 };
 export const textInputPlaceholderColor = theme.veryLightText;
 
@@ -26,7 +25,7 @@ export const TextInput = (props: {
   value: string;
 }) => (
   <ReactNativeTextInput
-    // style={textInputStyle}
+    style={{...textInputStyle, textAlignVertical: 'top'}}
     placeholderTextColor={textInputPlaceholderColor}
     {...props}
   />
