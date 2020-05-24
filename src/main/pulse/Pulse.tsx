@@ -18,7 +18,8 @@ import { delay } from "lodash";
 import { addTagsToUser } from "../../id";
 
 const Line = ({ line, stroke }: any) => (
-  <Path key={"line"} stroke={stroke} fill={"none"} />
+  // <Path key={"line"} stroke={stroke} fill={"none"} />
+  <></>
 );
 
 const Chart = ({ data }: { data: number[] }) => {

@@ -94,7 +94,7 @@ export default class MainScreen extends React.Component<
   }
 > {
   static navigationOptions = {
-    header: null,
+    header: () => <></>,
   };
 
   constructor(props: any) {
