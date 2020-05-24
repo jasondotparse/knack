@@ -10,6 +10,7 @@ import PropTypes from "prop-types";
 import theme from "./theme";
 import { Feather } from "@expo/vector-icons";
 import { find } from "lodash";
+import distortions, { CognitiveDistortion } from "./distortions";
 
 export interface ParentComponent {
   children: any;
@@ -395,7 +396,7 @@ export const B = ({ children, style }: { children: any; style?: any }) => (
   <Text style={{ fontWeight: "bold", ...style }}>{children}</Text>
 );
 
-export const CapsLabel = ({ children, style }) => (
+export const CapsLabel = ({ children, style }: any) => (
   <Text
     style={{
       fontSize: 10,
@@ -408,4 +409,131 @@ export const CapsLabel = ({ children, style }) => (
     {children}
   </Text>
 );
+
+export const RoundedSelector = ({
+  items,
+  onPress,
+  style,
+}: {
+  onPress: (slug: string) => void;
+} & any) => (
+  <View
+    style={{
+      backgroundColor: theme.lightOffwhite,
+      ...style,
+    }}
+  >
+    {items.map(({ slug, selected }: any) => {
+      const item = find(distortions, { slug });
+      if (!item) {
+        return null;
+      }
+
+      const cogDistortion = item as CognitiveDistortion;
+
+      return (
+        <SelectorTextItem
+          key={slug}
+          emoji={cogDistortion.emoji || "🍎"}
+          text={cogDistortion.label}
+          description={cogDistortion.description}
+          selected={selected}
+          onPress={() => onPress(slug)}
+        />
+      );
+    })}
+  </View>
+);
+
+RoundedSelector.propTypes = {
+  items: PropTypes.array.isRequired,
+  onPress: PropTypes.func.isRequired,
+  style: PropTypes.object,
+};
+
+export const SelectorTextItem = ({
+  text,
+  emoji,
+  description,
+  selected = false,
+  onPress,
+}: any) => (
+  <TouchableOpacity
+    onPress={onPress}
+    style={{
+      backgroundColor: selected ? theme.blue : "white",
+      borderColor: selected ? theme.darkBlue : theme.lightGray,
+      borderBottomWidth: 2,
+      paddingTop: 8,
+      paddingBottom: 4,
+      borderRadius: 8,
+      borderWidth: 1,
+      marginBottom: 4,
+      marginTop: 1,
+    }}
+  >
+    <View style={{ flexDirection: "column" }}>
+      <View style={{ flexDirection: "row", marginBottom: 12 }}>
+        <Text
+          style={{
+            marginRight: 12,
+            marginLeft: 12,
+          }}
+        >
+          {emoji}
+        </Text>
+
+        <View
+          style={{
+            justifyContent: "space-between",
+            alignItems: "center",
+            flexDirection: "row",
+          }}
+        >
+          <Text
+            style={{
+              fontWeight: "600",
+              fontSize: 16,
+              color: selected ? "white" : theme.darkText,
+              marginRight: 8,
+            }}
+          >
+            {text}
+          </Text>
+          {selected && <Feather name={"check"} size={16} color={"white"} />}
+        </View>
+      </View>
+
+      <View
+        style={{
+          marginRight: 12,
+          marginLeft: 12,
+          marginBottom: 6,
+          backgroundColor: selected ? theme.darkBlue : theme.lightOffwhite,
+          paddingLeft: 12,
+          paddingRight: 12,
+          paddingBottom: 6,
+          paddingTop: 6,
+          borderRadius: 8,
+        }}
+      >
+        <Paragraph
+          style={{
+            fontWeight: "400",
+            fontSize: 16,
+            color: selected ? "white" : theme.darkText,
+          }}
+        >
+          {description}
+        </Paragraph>
+      </View>
+    </View>
+  </TouchableOpacity>
+);
+
+SelectorTextItem.propTypes = {
+  text: PropTypes.string.isRequired,
+  selected: PropTypes.bool,
+  onPress: PropTypes.func.isRequired,
+};
 

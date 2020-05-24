@@ -40,6 +40,7 @@ export default class AutomaticThoughtScreen extends React.Component<
     this.props.navigation.addListener("willFocus", args => {
       const thought = get(args, "state.params.thought", newThought());
       const isEditing = get(args, "state.params.isEditing", false);
+
       this.setState({
         thought,
         isEditing,
@@ -61,10 +62,16 @@ export default class AutomaticThoughtScreen extends React.Component<
   onNext = async () => {
     haptic.impact(Haptic.ImpactFeedbackStyle.Light);
     stats.thoughtRecorded();
-    // const thought = await saveThought(this.state.thought);
-    // this.props.navigation.push('DISTORTION_SCREEN', {
-    //   thought,
-    // });
+
+    if (this.state.thought) {
+      // @ts-ignore
+      const thought = await saveThought(this.state.thought);
+      
+      // @ts-ignore
+      this.props.navigation.push('DISTORTION_SCREEN', {
+        thought,
+      });
+    }
   };
 
   // From editing
@@ -108,9 +115,10 @@ export default class AutomaticThoughtScreen extends React.Component<
                 style={{...textInputStyle, textAlignVertical: 'top'}}
                 placeholderTextColor={textInputPlaceholderColor}
                 placeholder={i18n.t("cbt_form.auto_thought_placeholder")}
-                // value={
-                //   this.state.thought ? this.state.thought.automaticThought : ""
-                // }
+                value={
+                  // @ts-ignore
+                  this.state.thought.automaticThought
+                }
                 multiline={true}
                 numberOfLines={6}
                 onChangeText={this.onChange}

@@ -48,7 +48,7 @@ export const saveThought = async (
   const isSavedThought = (thought as SavedThought).uuid === undefined;
   if (isSavedThought) {
     saveableThought = {
-      uuid: getThoughtKey(uuidv4()),
+      uuid: '12345', // getThoughtKey(uuidv4())
       createdAt: new Date(),
       updatedAt: new Date(),
       ...thought,
