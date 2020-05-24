@@ -58,7 +58,7 @@ const ExerciseButtons = ({
         })
       }
     /> */}
-      {showProgression && <Pulse navigation={navigation} />}
+      {false && <Pulse navigation={navigation} />}
       <ExerciseButton
         title="New Prediction"
         hint="Manage anxiety around upcoming events or tasks."
