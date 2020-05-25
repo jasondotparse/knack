@@ -1,6 +1,5 @@
 import { AsyncStorage } from "react-native";
 import stringify from "json-stringify-safe";
-import { v4 as uuidv4 } from 'uuid';
 import { Thought, SavedThought } from "./thoughts";
 import dayjs from "dayjs";
 import parseThoughts from "./main/parseThoughts";
@@ -48,7 +47,7 @@ export const saveThought = async (
   const isSavedThought = (thought as SavedThought).uuid === undefined;
   if (isSavedThought) {
     saveableThought = {
-      uuid: '12345', // getThoughtKey(uuidv4())
+      uuid: getThoughtKey('12345'),
       createdAt: new Date(),
       updatedAt: new Date(),
       ...thought,

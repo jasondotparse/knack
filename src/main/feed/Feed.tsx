@@ -27,7 +27,6 @@ export default class Feed extends React.Component<
   },
   {
     shouldFadeIn: boolean;
-    shouldPromptSurvey: boolean;
     shouldPromptCheckup: boolean;
     groups: ExerciseGroup[];
     areExercisesLoaded: boolean;
@@ -35,7 +34,6 @@ export default class Feed extends React.Component<
 > {
   state = {
     shouldFadeIn: false,
-    shouldPromptSurvey: false,
     shouldPromptCheckup: false,
     groups: [],
     areExercisesLoaded: false,
@@ -44,7 +42,6 @@ export default class Feed extends React.Component<
   componentDidMount() {
     this.loadExercises();
     this.loadShouldPromptCheckup();
-    this.loadShouldShowSurveyPrompt();
 
     setTimeout(
       () =>
@@ -72,35 +69,6 @@ export default class Feed extends React.Component<
     const date = await getNextCheckupDate();
     this.setState({
       shouldPromptCheckup: dayjs().isAfter(dayjs(date)),
-    });
-  };
-
-  loadShouldShowSurveyPrompt = async () => {
-    const isDayToShow = await passesDayFilter(3);
-    if (!isDayToShow) {
-      this.setState({
-        shouldPromptSurvey: false,
-      });
-      return;
-    }
-
-    const passes = await passesFeatureFlag("disappointed-survey", 2);
-    if (!passes) {
-      this.setState({
-        shouldPromptSurvey: false,
-      });
-      return;
-    }
-
-    if (await flagstore.get("has-been-surveyed", "false")) {
-      this.setState({
-        shouldPromptSurvey: false,
-      });
-      return;
-    }
-
-    this.setState({
-      shouldPromptSurvey: true,
     });
   };
 
@@ -146,13 +114,6 @@ export default class Feed extends React.Component<
     });
   };
 
-  dismissSurveyPrompt = async () => {
-    await flagstore.setTrue("has-been-surveyed");
-    this.setState({
-      shouldPromptSurvey: false,
-    });
-  };
-
   render() {
     return (
       <FadesIn pose={this.state.shouldFadeIn ? "visible" : "hidden"}>
@@ -170,13 +131,6 @@ export default class Feed extends React.Component<
               this.props.navigation.navigate('CHECKUP_SCREEN');
               haptic.impact(Haptic.ImpactFeedbackStyle.Medium);
             }}
-          />
-        )}
-
-        {this.state.shouldPromptSurvey && !this.state.shouldPromptCheckup && (
-          <SurveyPrompt
-            onPressYes={this.navigateToSurveyScreen}
-            onPressNo={this.dismissSurveyPrompt}
           />
         )}
       </FadesIn>
