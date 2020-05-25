@@ -5,7 +5,6 @@ import ExerciseList from "../exercises/ExerciseList";
 import CheckupPrompt from "../CheckupPrompt";
 import { userFollowedUpOnPrediction } from "../predictions/stats";
 import * as flagstore from "../../flagstore";
-import SurveyPrompt from "../survey/SurveyPrompt";
 import {
   NavigationScreenProp,
   NavigationAction,
@@ -90,11 +89,6 @@ export default class Feed extends React.Component<
     this.props.navigation.navigate('PREDICTION_SUMMARY_SCREEN', {
       prediction,
     });
-  };
-
-  navigateToSurveyScreen = async () => {
-    await flagstore.setTrue("has-been-surveyed");
-    this.props.navigation.navigate('SURVEY_SCREEN');
   };
 
   navigateToViewerWithThought = (thought: SavedThought) => {

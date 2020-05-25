@@ -593,3 +593,13 @@ IconButton.propTypes = {
   onPress: PropTypes.func.isRequired,
   style: PropTypes.any,
 };
+
+export const LI = ({ children }: any) => (
+  <Text
+    style={{
+      fontSize: 16,
+      color: theme.lightText,
+      marginBottom: 4,
+    }}
+  >{`\u2022 ${children}`}</Text>
+);
