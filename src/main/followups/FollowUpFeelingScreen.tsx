@@ -1,12 +1,11 @@
 import React from "react";
 import { Thought } from "../../thoughts";
-import { ScreenProps } from "react-navigation";
+import ScreenProps from "../../ScreenProps";
 import { Container, GhostButton, HintHeader, SubHeader } from "../../ui";
 import Constants from "expo-constants";
 import theme from "../../theme";
 import { StatusBar, View } from "react-native";
 import * as stats from "../../stats";
-import { FOLLOW_UP_FEELING_REVIEW_SCREEN, THOUGHT_SCREEN } from "../screens";
 import { get } from "lodash";
 import { saveThought } from "../../thoughtstore";
 import haptic from "../../haptic";
@@ -20,7 +19,7 @@ export default class FollowUpFeelingScreen extends React.Component<
   }
 > {
   static navigationOptions = {
-    header: null,
+    header: () => <></>,
   };
 
   componentDidMount() {
@@ -36,7 +35,9 @@ export default class FollowUpFeelingScreen extends React.Component<
     feeling: "better" | "worse" | "same"
   ): Promise<Thought> => {
     const thought = this.state.thought;
+    // @ts-ignore
     thought.followUpCheckup = feeling;
+    // @ts-ignore
     return saveThought(this.state.thought);
   };
 
@@ -49,7 +50,7 @@ export default class FollowUpFeelingScreen extends React.Component<
     await scheduleBoost(FINISHED_FOLLOW_UP);
     await scheduleBoost(FELT_BETTER);
 
-    this.props.navigation.navigate(FOLLOW_UP_FEELING_REVIEW_SCREEN, {
+    this.props.navigation.navigate('FOLLOW_UP_FEELING_REVIEW_SCREEN', {
       thought,
     });
   };
@@ -62,7 +63,7 @@ export default class FollowUpFeelingScreen extends React.Component<
 
     await scheduleBoost(FINISHED_FOLLOW_UP);
 
-    this.props.navigation.navigate(FOLLOW_UP_FEELING_REVIEW_SCREEN, {
+    this.props.navigation.navigate('FOLLOW_UP_FEELING_REVIEW_SCREEN', {
       thought,
     });
   };
@@ -75,14 +76,14 @@ export default class FollowUpFeelingScreen extends React.Component<
 
     await scheduleBoost(FINISHED_FOLLOW_UP);
 
-    this.props.navigation.navigate(FOLLOW_UP_FEELING_REVIEW_SCREEN, {
+    this.props.navigation.navigate('FOLLOW_UP_FEELING_REVIEW_SCREEN', {
       thought,
     });
   };
 
   onClose = async () => {
     haptic.selection();
-    this.props.navigation.navigate(THOUGHT_SCREEN);
+    this.props.navigation.navigate('THOUGHT_SCREEN');
   };
 
   render() {

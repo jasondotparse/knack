@@ -1,6 +1,6 @@
 import React from "react";
 import { Thought, newThought } from "../../thoughts";
-import { ScreenProps } from "react-navigation";
+import ScreenProps from "../../ScreenProps";
 import {
   Container,
   MediumHeader,
@@ -11,7 +11,6 @@ import {
 import Constants from "expo-constants";
 import theme from "../../theme";
 import { StatusBar } from "react-native";
-import { THOUGHT_SCREEN, FINISHED_SCREEN } from "../screens";
 import { get } from "lodash";
 import haptic from "../../haptic";
 import { saveThought } from "../../thoughtstore";
@@ -33,7 +32,7 @@ export default class FollowUpFeelingReviewScreen extends React.Component<
   }
 > {
   static navigationOptions = {
-    header: null,
+    header: () => <></>,
   };
 
   state = {
@@ -56,21 +55,23 @@ export default class FollowUpFeelingReviewScreen extends React.Component<
 
     // Mark this followup as completed
     const oldThought = this.state.thought;
+    // @ts-ignore
     oldThought.followUpCompleted = true;
+    // @ts-ignore
     await saveThought(oldThought);
   };
 
   onFinish = async () => {
     haptic.selection();
     await this.completeFollowUp();
-    this.props.navigation.navigate(THOUGHT_SCREEN);
+    this.props.navigation.navigate('THOUGHT_SCREEN');
   };
 
   onReviewThought = async () => {
     stats.userReviewedThoughtOnFollowUp();
 
     haptic.selection();
-    this.props.navigation.navigate(FINISHED_SCREEN, {
+    this.props.navigation.navigate('FINISHED_SCREEN', {
       thought: this.state.thought,
     });
   };
@@ -81,7 +82,7 @@ export default class FollowUpFeelingReviewScreen extends React.Component<
     haptic.selection();
     await this.completeFollowUp();
 
-    this.props.navigation.navigate(THOUGHT_SCREEN, {
+    this.props.navigation.navigate('THOUGHT_SCREEN', {
       thought: newThought(),
       isRequestingPopUp: true,
     });
@@ -103,6 +104,8 @@ export default class FollowUpFeelingReviewScreen extends React.Component<
         <StatusBar barStyle="dark-content" hidden={false} />
 
         <MediumHeader>
+          {/*
+          // @ts-ignore */}
           {this.state.thought.followUpCheckup === "better"
             ? POSITIVE_HEADER
             : NEUTRAL_OR_NEGATIVE_HEADER}
@@ -112,11 +115,14 @@ export default class FollowUpFeelingReviewScreen extends React.Component<
             marginBottom: 12,
           }}
         >
+          {/*
+          // @ts-ignore */}
           {this.state.thought.followUpCheckup === "better"
             ? POSITIVE_HINT
             : NEUTRAL_OR_NEGATIVE_HINT}
         </HintHeader>
-
+        {/*
+        // @ts-ignore */}
         {this.state.thought.followUpCheckup === "better" && (
           <>
             <ActionButton
@@ -133,7 +139,8 @@ export default class FollowUpFeelingReviewScreen extends React.Component<
             />
           </>
         )}
-
+        {/*
+        // @ts-ignore */}
         {this.state.thought.followUpCheckup !== "better" && (
           <>
             <ActionButton

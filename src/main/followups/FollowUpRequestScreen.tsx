@@ -11,14 +11,13 @@ import Constants from "expo-constants";
 import theme from "../../theme";
 import { StatusBar } from "react-native";
 import { identify } from "../../id";
-import { FINISHED_SCREEN } from "../screens";
 import { Thought } from "../../thoughts";
 import { get } from "lodash";
 import dayjs from "dayjs";
 import { saveThought } from "../../thoughtstore";
 import { FOLLOW_UP_ONESIGNAL_TEMPLATE } from "./templates";
 import * as stats from "../../stats";
-import scheduleNotification from "../../notifications/scheduleNotification";
+// import scheduleNotification from "../../notifications/scheduleNotification";
 
 function getFollowUpTime() {
   const inAFewHours = dayjs().add(2, "hour");
@@ -37,7 +36,7 @@ export default class FollowUpScreen extends React.Component<
   }
 > {
   static navigationOptions = {
-    header: null,
+    header: () => <></>,
   };
 
   componentDidMount() {
@@ -61,7 +60,9 @@ export default class FollowUpScreen extends React.Component<
 
     // Tell the user/app we've got a followup scheduled
     const thought = this.state.thought;
+    // @ts-ignore
     thought.followUpDate = followUpDate;
+    // @ts-ignore
     await saveThought(thought);
 
     // Tell our api to queue up a followup notification
@@ -69,13 +70,13 @@ export default class FollowUpScreen extends React.Component<
     // HEADS UP WE DO NOT WAIT FOR THIS TO COMPLETE.
     // Zeit can be a bit slow to wake up sometimes,
     // it's much better we just continue about our day first.
-    scheduleNotification(followUpDate, FOLLOW_UP_ONESIGNAL_TEMPLATE);
+    // scheduleNotification(followUpDate, FOLLOW_UP_ONESIGNAL_TEMPLATE);
 
     this.onContinue();
   };
 
   onContinue = () => {
-    this.props.navigation.navigate(FINISHED_SCREEN, {
+    this.props.navigation.navigate('FINISHED_SCREEN', {
       thought: this.state.thought,
     });
   };
