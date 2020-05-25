@@ -24,12 +24,9 @@ import {
   HistoryButtonLabelSetting,
   isHistoryButtonLabelSetting,
 } from "./setting";
-import { recordScreenCallOnFocus } from "./navigation";
 // @ts-ignore
 import OneSignal from "react-native-onesignal";
 // @ts-ignore
-// import { ONESIGNAL_SECRET } from "react-native-dotenv";
-import * as stats from "./stats";
 import { FadesIn } from "./animations";
 import dayjs from "dayjs";
 import { hasPincode, removePincode } from "./lock/lockstore";
@@ -302,7 +299,6 @@ class SettingScreen extends React.Component<Props, State> {
                   this.setState({
                     areNotificationsOn: true,
                   });
-                  stats.userTurnedOnNotifications();
                 }}
               />
 
@@ -314,7 +310,6 @@ class SettingScreen extends React.Component<Props, State> {
                   this.setState({
                     areNotificationsOn: false,
                   });
-                  stats.userTurnedOffNotifications();
                 }}
               />
             </Row>

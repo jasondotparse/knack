@@ -16,14 +16,7 @@ import { KeyboardAvoidingView, ScrollView, StatusBar } from "react-native";
 import theme from "../../theme";
 import haptic from "../../haptic";
 import * as Haptic from "expo-haptics";
-import { THOUGHT_SCREEN } from "../screens";
 import { addTagsToUser } from "../../id";
-import {
-  userRecordedDisappointedSurvey,
-  userRecordedBenefitSurvey,
-  userRecordedTypeOfPersonSurvey,
-  userRecordedCouldImproveSurvey,
-} from "./stats";
 import { resetNavigationTo } from "../../resetNavigationTo";
 import SinglePageForm from "../../SinglePageForm";
 import { TextInput } from "../../textInputStyle";
@@ -52,7 +45,6 @@ export default class SurveyScreen extends React.Component<
     haptic.impact(Haptic.ImpactFeedbackStyle.Light);
 
     // Record over time
-    userRecordedDisappointedSurvey(answer);
     await addTagsToUser({
       disappointedAnswer: answer,
     });
@@ -83,11 +75,7 @@ export default class SurveyScreen extends React.Component<
     haptic.notification(Haptic.NotificationFeedbackType.Success);
 
     // Send values
-    userRecordedBenefitSurvey(this.state.benefitOfQuirkValue);
-    userRecordedTypeOfPersonSurvey(this.state.typeOfPersonValue);
-    userRecordedCouldImproveSurvey(this.state.improveQuirkValue);
-
-    resetNavigationTo(this.props.navigation, THOUGHT_SCREEN);
+    resetNavigationTo(this.props.navigation, 'THOUGHT_SCREEN');
   };
 
   onNext = async () => {

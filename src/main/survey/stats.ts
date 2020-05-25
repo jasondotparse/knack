@@ -1,8 +1,5 @@
-import { initSegment } from "../../stats";
 import * as Segment from "expo-analytics-segment";
 import isInDev from "../../isInDev";
-
-initSegment();
 
 export function userRecordedDisappointedSurvey(answer: string) {
   if (isInDev()) {

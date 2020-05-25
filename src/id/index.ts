@@ -4,7 +4,6 @@ import {v4 as uuidv4} from "uuid";
 import OneSignal from "react-native-onesignal";
 // @ts-ignore
 // import { ONESIGNAL_SECRET } from "react-native-dotenv";
-import * as stats from "../stats";
 import * as idstore from "./idstore";
 import Sentry from "../sentry";
 
@@ -38,9 +37,6 @@ export async function identify() {
       kOSSettingsKeyInFocusDisplayOption: 0,
     });
     OneSignal.sendTag("userID", userID);
-
-    // Identify in Segment
-    stats.identify(userID);
   } catch (err) {
     // Just capture the exception and continue, don't :rip:
     Sentry.captureException(err);
@@ -48,7 +44,7 @@ export async function identify() {
 }
 
 export async function addTagsToUser(tags: { [key: string]: string }) {
-  stats.identifyWithTraits(await getUserID(), tags);
+
 }
 
 export async function getUserID(): Promise<string> {

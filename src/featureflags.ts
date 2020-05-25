@@ -1,5 +1,4 @@
 import { getUserID } from "./id";
-import { identifyWithTraits } from "./stats";
 import dayjs from "dayjs";
 
 function toHash(str: string) {
@@ -28,10 +27,6 @@ export async function passesFeatureFlag(
   const id = await getUserID();
   const diceRoll = toHash(id) % (oneIn - 1);
   const passes = diceRoll === 0;
-
-  identifyWithTraits(id, {
-    [`feature-flag-${name}`]: passes ? "true" : "false",
-  });
 
   return passes;
 }

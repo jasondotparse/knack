@@ -5,7 +5,6 @@ import { Container, MediumHeader, GhostButton } from "../ui";
 import Constants from "expo-constants";
 import theme from "../theme";
 import { StatusBar, Platform } from "react-native";
-import * as stats from "../stats";
 import { get } from "lodash";
 import { saveThought, countThoughts } from "../thoughtstore";
 import haptic from "../haptic";
@@ -78,7 +77,6 @@ export default class FeelingScreen extends React.Component<
 
   onFeltBetter = async () => {
     haptic.selection();
-    stats.userFeltBetter();
     const thought = await this.saveCheckup("better");
 
     if (Platform.OS === "ios") {
@@ -106,7 +104,6 @@ export default class FeelingScreen extends React.Component<
 
     await this._sendStandardBoosts();
 
-    stats.userFeltTheSame();
     this.props.navigation.navigate('FOLLOW_UP_REQUEST_SCREEN', {
       thought,
     });
@@ -118,7 +115,6 @@ export default class FeelingScreen extends React.Component<
 
     await this._sendStandardBoosts();
 
-    stats.userFeltWorse();
     this.props.navigation.navigate('FOLLOW_UP_REQUEST_SCREEN', {
       thought,
     });

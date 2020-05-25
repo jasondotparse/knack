@@ -15,9 +15,6 @@ import { Thought } from "../../thoughts";
 import { get } from "lodash";
 import dayjs from "dayjs";
 import { saveThought } from "../../thoughtstore";
-import { FOLLOW_UP_ONESIGNAL_TEMPLATE } from "./templates";
-import * as stats from "../../stats";
-// import scheduleNotification from "../../notifications/scheduleNotification";
 
 function getFollowUpTime() {
   const inAFewHours = dayjs().add(2, "hour");
@@ -55,7 +52,6 @@ export default class FollowUpScreen extends React.Component<
   }
 
   onSetCheckup = async () => {
-    stats.userScheduledFollowUp();
     const followUpDate = getFollowUpTime();
 
     // Tell the user/app we've got a followup scheduled
@@ -125,7 +121,6 @@ export default class FollowUpScreen extends React.Component<
           borderColor={theme.gray}
           textColor={theme.lightText}
           onPress={() => {
-            stats.userDidNotScheduleFollowUp();
             this.onContinue();
           }}
         />

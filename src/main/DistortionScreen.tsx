@@ -15,7 +15,6 @@ import Constants from "expo-constants";
 import theme from "../theme";
 import { Text, ScrollView, View } from "react-native";
 import { Thought } from "../thoughts";
-import * as stats from "../stats";
 import haptic from "../haptic";
 import { saveThought } from "../thoughtstore";
 import i18n from "../i18n";
@@ -88,8 +87,6 @@ export default class DistortionScreen extends React.Component<
     });
 
     haptic.selection();
-    stats.userFilledOutFormField("distortions");
-    stats.userCheckedDistortion(selected);
   };
 
   onBackToThought = async () => {

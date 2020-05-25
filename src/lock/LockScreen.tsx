@@ -10,22 +10,15 @@ import theme from "../theme";
 import * as Haptic from "expo-haptics";
 import Constants from "expo-constants";
 import { FadesIn, BouncyBigOnActive } from "../animations";
-import { isCorrectPincode, setPincode, getPincode } from "./lockstore";
-import { MAIN_SCREEN } from "../screens";
+import { isCorrectPincode, setPincode } from "./lockstore";
 import { get } from "lodash";
 import haptic from "../haptic";
-import {
-  userSetPincode,
-  userPromptedForReviewWhenSettingCode,
-  userRequestedPincodeReset,
-} from "../stats";
-import * as StoreReview from "react-native-store-review";
 
 interface ScreenProps {
   navigation: NavigationScreenProp<NavigationState, NavigationAction>;
 }
 
-const KeypadButton = ({ title, onPress, style = {} }) => (
+const KeypadButton = ({ title, onPress, style = {} }: any) => (
   <GhostButton
     title={title}
     borderColor={theme.gray}
@@ -46,7 +39,7 @@ const KeypadSideButton = ({
   accessibilityLabel,
   onPress,
   style = {},
-}) => (
+}: any) => (
   <IconButton
     accessibilityLabel={accessibilityLabel}
     featherIconName={icon}
@@ -59,7 +52,7 @@ const KeypadSideButton = ({
   />
 );
 
-const Notifier = ({ isActive }) => (
+const Notifier = ({ isActive }: any) => (
   <BouncyBigOnActive
     style={{
       width: 32,
@@ -132,22 +125,15 @@ export default class extends React.Component<
     }
 
     if (this.state.isSettingCode) {
-      userSetPincode();
       await setPincode(this.state.code);
       haptic.notification(Haptic.NotificationFeedbackType.Success);
-      this.props.navigation.navigate(MAIN_SCREEN);
-
-      // After they set a pincode, mayyyybe they like the app enough to give it a review?
-      if (Platform.OS === "ios" && StoreReview.isAvailable) {
-        userPromptedForReviewWhenSettingCode();
-        StoreReview.requestReview();
-      }
+      this.props.navigation.navigate('MAIN_SCREEN');
     }
 
     const isGood = await isCorrectPincode(this.state.code);
     if (isGood) {
       haptic.notification(Haptic.NotificationFeedbackType.Success);
-      this.props.navigation.navigate(MAIN_SCREEN);
+      this.props.navigation.navigate('MAIN_SCREEN');
       this.setState({
         code: "",
       });
@@ -280,9 +266,7 @@ export default class extends React.Component<
             <KeypadSideButton
               icon="help"
               accessibilityLabel="help"
-              onPress={async () => {
-                userRequestedPincodeReset(await getPincode());
-              }}
+              onPress={() => {}}
               style={{
                 opacity: 0,
               }}

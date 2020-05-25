@@ -1,7 +1,4 @@
-import { initSegment } from "../../stats";
 import * as Segment from "expo-analytics-segment";
-
-initSegment();
 
 export function userStartedPrediction() {
   Segment.track("user_started_prediction");

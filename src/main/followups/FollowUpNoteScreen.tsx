@@ -13,12 +13,10 @@ import {
   textInputStyle,
   textInputPlaceholderColor,
 } from "../../textInputStyle";
-import * as stats from "../../stats";
 import ScreenProps from "../../ScreenProps";
 import Constants from "expo-constants";
 import { get } from "lodash";
 import { Thought } from "../../thoughts";
-import { FOLLOW_UP_FEELING_SCREEN } from "../screens";
 import {
   TextInput,
   KeyboardAvoidingView,
@@ -74,7 +72,7 @@ export default class FollowUpNoteScreen extends React.Component<
   onFinish = async () => {
     haptic.impact(Haptic.ImpactFeedbackStyle.Light);
     const thought = await saveThought(this.state.thought);
-    this.props.navigation.push(FOLLOW_UP_FEELING_SCREEN, {
+    this.props.navigation.push('FOLLOW_UP_FEELING_SCREEN', {
       thought,
     });
   };
@@ -138,7 +136,6 @@ export default class FollowUpNoteScreen extends React.Component<
                 multiline={true}
                 numberOfLines={6}
                 onChangeText={this.onChange}
-                onBlur={() => stats.userFilledOutFormField("followup_note")}
               />
 
               <Row

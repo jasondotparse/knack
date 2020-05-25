@@ -27,7 +27,6 @@ import followUpState from "./followups/followUpState";
 import * as flagstore from "../flagstore";
 import { resetNavigationTo } from "../resetNavigationTo";
 import { Feather } from "@expo/vector-icons";
-import { userRepeatedThought } from "../stats";
 
 export default class FinishedScreen extends React.Component<
   ScreenProps,
@@ -105,7 +104,6 @@ export default class FinishedScreen extends React.Component<
 
   onRepeat = async () => {
     haptic.impact(Haptic.ImpactFeedbackStyle.Heavy);
-    userRepeatedThought();
     const thought = newThought();
     // @ts-ignore
     thought.automaticThought = this.state.thought.automaticThought;

@@ -3,7 +3,6 @@ import ScreenProps from "../ScreenProps";
 import { View, StatusBar } from "react-native";
 import { getIsExistingUser, setIsExistingUser } from "../thoughtstore";
 import { newThought, Thought } from "../thoughts";
-import * as stats from "../stats";
 import Constants from "expo-constants";
 import theme from "../theme";
 import { get } from "lodash";
@@ -109,7 +108,6 @@ export default class MainScreen extends React.Component<
     getIsExistingUser().then((isExisting: boolean) => {
       // New Users
       if (!isExisting) {
-        stats.newuser();
         setIsExistingUser();
       }
     });

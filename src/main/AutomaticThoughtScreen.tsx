@@ -14,7 +14,6 @@ import { get } from "lodash";
 import { textInputStyle, textInputPlaceholderColor } from "../textInputStyle";
 import { TextInput, KeyboardAvoidingView, View } from "react-native";
 import i18n from "../i18n";
-import * as stats from "../stats";
 import theme from "../theme";
 import { saveThought } from "../thoughtstore";
 import haptic from "../haptic";
@@ -61,7 +60,6 @@ export default class AutomaticThoughtScreen extends React.Component<
 
   onNext = async () => {
     haptic.impact(Haptic.ImpactFeedbackStyle.Light);
-    stats.thoughtRecorded();
 
     if (this.state.thought) {
       // @ts-ignore
@@ -122,7 +120,6 @@ export default class AutomaticThoughtScreen extends React.Component<
                 multiline={true}
                 numberOfLines={6}
                 onChangeText={this.onChange}
-                onBlur={() => stats.userFilledOutFormField("automatic")}
               />
 
               <Row

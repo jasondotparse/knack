@@ -19,7 +19,6 @@ import { Prediction } from "../predictions/predictionstore";
 import { getPredictionState } from "../predictions/results";
 import followUpState from "../followups/followUpState";
 import { SavedThought } from "../../thoughts";
-import { userStartedFollowUp, userDismissedSurvey } from "../../stats";
 import { FadesIn } from "../../animations";
 
 export default class Feed extends React.Component<
@@ -135,7 +134,6 @@ export default class Feed extends React.Component<
 
     // Follow-ups
     if (followUpState(thought) === "ready") {
-      userStartedFollowUp();
       this.props.navigation.navigate('FOLLOW_UP_NOTE_SCREEN', {
         thought,
       });
@@ -153,7 +151,6 @@ export default class Feed extends React.Component<
     this.setState({
       shouldPromptSurvey: false,
     });
-    userDismissedSurvey();
   };
 
   render() {

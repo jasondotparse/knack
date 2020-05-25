@@ -14,7 +14,6 @@ import { get } from "lodash";
 import { textInputStyle, textInputPlaceholderColor } from "../textInputStyle";
 import { TextInput, KeyboardAvoidingView } from "react-native";
 import i18n from "../i18n";
-import * as stats from "../stats";
 import theme from "../theme";
 import { saveThought } from "../thoughtstore";
 import haptic from "../haptic";
@@ -110,7 +109,6 @@ export default class AlternativeScreen extends React.Component<
                 multiline={true}
                 numberOfLines={6}
                 onChangeText={this.onChange}
-                onBlur={() => stats.userFilledOutFormField("alternative")}
               />
 
               <Row

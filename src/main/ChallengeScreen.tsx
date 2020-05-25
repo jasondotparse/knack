@@ -12,7 +12,6 @@ import {
 } from "../ui";
 import { textInputStyle, textInputPlaceholderColor } from "../textInputStyle";
 import i18n from "../i18n";
-import * as stats from "../stats";
 import ScreenProps from "../ScreenProps";
 import Constants from "expo-constants";
 import { get } from "lodash";
@@ -151,7 +150,6 @@ export default class ChallengeScreen extends React.Component<
                 multiline={true}
                 numberOfLines={6}
                 onChangeText={this.onChange}
-                onBlur={() => stats.userFilledOutFormField("challenge")}
               />
 
               <Row

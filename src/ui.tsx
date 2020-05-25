@@ -537,3 +537,59 @@ SelectorTextItem.propTypes = {
   onPress: PropTypes.func.isRequired,
 };
 
+export const IconButton = ({
+  featherIconName,
+  accessibilityLabel,
+  onPress,
+  style,
+  iconSize,
+  hasBadge,
+}: {
+  featherIconName: string;
+  accessibilityLabel: string;
+  onPress: () => void;
+  style?: object;
+  iconSize?: number;
+  hasBadge?: boolean;
+}) => (
+  <TouchableOpacity
+    style={{
+      backgroundColor: theme.lightGray,
+      height: 48,
+      width: 48,
+      justifyContent: "center",
+      alignItems: "center",
+      borderRadius: 10,
+      alignSelf: "center",
+      position: "relative",
+      ...style,
+    }}
+    accessibilityLabel={accessibilityLabel}
+    onPress={onPress}
+  >
+    {hasBadge && (
+      <View
+        style={{
+          height: 20,
+          width: 20,
+          borderRadius: 24,
+          backgroundColor: theme.pink,
+          position: "absolute",
+          bottom: 34,
+          left: 34,
+        }}
+      />
+    )}
+    <Feather
+      name={featherIconName}
+      size={iconSize || 24}
+      color={theme.veryLightText}
+    />
+  </TouchableOpacity>
+);
+
+IconButton.propTypes = {
+  featherIconName: PropTypes.string.isRequired,
+  onPress: PropTypes.func.isRequired,
+  style: PropTypes.any,
+};
