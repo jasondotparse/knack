@@ -7,6 +7,9 @@ import parseThoughts from "./main/parseThoughts";
 const EXISTING_USER_KEY = "@Quirk:existing-user";
 const THOUGHTS_KEY_PREFIX = `@Quirk:thoughts:`;
 
+// todo: find a legit uuid generator that works with RN
+const uuid = () => Math.round(Math.random() * 1000000000000);
+
 export function getThoughtKey(info: any): string {
   return THOUGHTS_KEY_PREFIX + info;
 }
@@ -47,7 +50,7 @@ export const saveThought = async (
   const isSavedThought = (thought as SavedThought).uuid === undefined;
   if (isSavedThought) {
     saveableThought = {
-      uuid: getThoughtKey('12345'),
+      uuid: getThoughtKey(uuid()),
       createdAt: new Date(),
       updatedAt: new Date(),
       ...thought,
