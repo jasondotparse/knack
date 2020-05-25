@@ -36,7 +36,7 @@ export default class FinishedScreen extends React.Component<
   }
 > {
   static navigationOptions = {
-    header: null,
+    header: () => <></>,
   };
 
   state = {
