@@ -63,17 +63,6 @@ export default class AssumptionNoteScreen extends React.Component<
       return;
     }
 
-    // @ts-ignore
-    userRecordedExpectedExperience(this.state.prediction.expectedExperience);
-    if (
-      // @ts-ignore
-      this.state.prediction.expectedExperienceNote &&
-      // @ts-ignore
-      this.state.prediction.expectedExperienceNote !== ""
-    ) {
-      userRecordedExpectedExperienceNote();
-    }
-
     this.props.navigation.navigate('PREDICTION_FOLLOW_UP_SCHEDULE_SCREEN', {
       prediction: this.state.prediction,
     });
@@ -143,8 +132,6 @@ export default class AssumptionNoteScreen extends React.Component<
   };
 
   render() {
-    console.log(this.state);
-    
     if (!this.state.prediction) {
       return null;
     }
