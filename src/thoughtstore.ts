@@ -3,12 +3,10 @@ import stringify from "json-stringify-safe";
 import { Thought, SavedThought } from "./thoughts";
 import dayjs from "dayjs";
 import parseThoughts from "./main/parseThoughts";
+import { uuid } from './utils';
 
 const EXISTING_USER_KEY = "@Quirk:existing-user";
 const THOUGHTS_KEY_PREFIX = `@Quirk:thoughts:`;
-
-// todo: find a legit uuid generator that works with RN
-const uuid = () => Math.round(Math.random() * 1000000000000);
 
 export function getThoughtKey(info: any): string {
   return THOUGHTS_KEY_PREFIX + info;

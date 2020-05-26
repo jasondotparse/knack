@@ -19,7 +19,6 @@ import {
 // @ts-ignore
 import InvertibleScrollView from "react-native-invertible-scroll-view";
 import Feed from "./feed/Feed";
-import Pulse from "./pulse/Pulse";
 import { passesFeatureFlag } from "../featureflags";
 
 const ExerciseButtons = ({

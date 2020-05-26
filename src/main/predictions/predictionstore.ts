@@ -2,7 +2,7 @@ import { AsyncStorage } from "react-native";
 import Sentry from "../../sentry";
 import stringify from "json-stringify-safe";
 import dayjs from "dayjs";
-import { v4 as uuidv4 } from 'uuid';
+import { uuid } from '../../utils';
 
 export interface Prediction {
   uuid: string;
@@ -23,7 +23,7 @@ export interface Prediction {
 export function newPrediction() {
   const date = new Date();
   return {
-    uuid: uuidv4(),
+    uuid: uuid(),
     createdAt: date,
     updatedAt: date,
   };
