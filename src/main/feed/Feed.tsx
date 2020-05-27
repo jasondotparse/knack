@@ -4,7 +4,6 @@ import * as Haptic from "expo-haptics";
 import ExerciseList from "../exercises/ExerciseList";
 import CheckupPrompt from "../CheckupPrompt";
 import { userFollowedUpOnPrediction } from "../predictions/stats";
-import * as flagstore from "../../flagstore";
 import {
   NavigationScreenProp,
   NavigationAction,
@@ -12,7 +11,6 @@ import {
 } from "react-navigation";
 import { getNextCheckupDate, Checkup } from "../../checkups/checkupstore";
 import dayjs from "dayjs";
-import { passesDayFilter, passesFeatureFlag } from "../../featureflags";
 import { getSortedExerciseGroups, ExerciseGroup } from "../exercises/exercises";
 import { Prediction } from "../predictions/predictionstore";
 import { getPredictionState } from "../predictions/results";

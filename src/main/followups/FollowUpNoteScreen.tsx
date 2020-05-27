@@ -34,7 +34,7 @@ export default class FollowUpNoteScreen extends React.Component<
   }
 > {
   static navigationOptions = {
-    header: null,
+    header: () => <></>,
   };
 
   state = {
@@ -51,6 +51,7 @@ export default class FollowUpNoteScreen extends React.Component<
     });
   }
 
+  // @ts-ignore
   refreshFromNavigation = args => {
     const thought = get(args, "state.params.thought");
     this.setState({
@@ -71,7 +72,9 @@ export default class FollowUpNoteScreen extends React.Component<
 
   onFinish = async () => {
     haptic.impact(Haptic.ImpactFeedbackStyle.Light);
+    // @ts-ignore
     const thought = await saveThought(this.state.thought);
+    // @ts-ignore
     this.props.navigation.push('FOLLOW_UP_FEELING_SCREEN', {
       thought,
     });
@@ -119,6 +122,7 @@ export default class FollowUpNoteScreen extends React.Component<
               >
                 <SubHeader>Your Automatic Thought</SubHeader>
                 <Paragraph>{`"${
+                  // @ts-ignore
                   this.state.thought.automaticThought
                 }"`}</Paragraph>
               </View>
@@ -132,6 +136,7 @@ export default class FollowUpNoteScreen extends React.Component<
                 style={textInputStyle}
                 placeholderTextColor={textInputPlaceholderColor}
                 placeholder={`ex: "it wasn't as bad as I had thought"`}
+                // @ts-ignore
                 value={this.state.thought.followUpNote}
                 multiline={true}
                 numberOfLines={6}
