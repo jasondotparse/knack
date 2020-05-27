@@ -17,6 +17,7 @@ import AssumptionScreen from './predictions/AssumptionScreen';
 import PredictionFollowUpScreen from './predictions/PredictionFollowUpScreen';
 import PredictionFollowUpScheduleScreen from './predictions/PredictionFollowUpScheduleScreen';
 import FollowUpNoteScreen from './followups/FollowUpNoteScreen';
+import CheckupSummaryScreen from '../checkups/CheckupSummaryScreen';
 
 export default createStackNavigator(
   {
@@ -31,6 +32,7 @@ export default createStackNavigator(
     'FOLLOW_UP_FEELING_REVIEW_SCREEN': FollowUpFeelingReviewScreen,
     'FOLLOW_UP_NOTE_SCREEN': FollowUpNoteScreen,
     'FINISHED_SCREEN': FinishedScreen,
+    'CHECKUP_SUMMARY_SCREEN': CheckupSummaryScreen,
 
     // predictions
     'PREDICTION_ONBOARDING_SCREEN': PredictionOnboardingScreen,

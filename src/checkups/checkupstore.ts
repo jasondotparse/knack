@@ -1,7 +1,8 @@
 import { AsyncStorage } from "react-native";
 import stringify from "json-stringify-safe";
 import Sentry from "../sentry";
-import { v4 as uuidv4 } from 'uuid';
+// import { v4 as uuidv4 } from 'uuid';
+import { uuid } from '../utils';
 import dayjs from "dayjs";
 
 type Mood = "good" | "neutral" | "bad" | "unselected";
@@ -27,7 +28,7 @@ export function newCheckup(): Checkup {
   const date = new Date();
   return {
     currentMood: "unselected",
-    uuid: uuidv4(),
+    uuid: uuid(),
     createdAt: date,
     updatedAt: date,
   };

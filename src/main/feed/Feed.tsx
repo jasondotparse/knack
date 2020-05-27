@@ -70,9 +70,10 @@ export default class Feed extends React.Component<
   };
 
   navigateToCheckupViewer = async (checkup: Checkup) => {
-    // this.props.navigation.push('CHECKUP_SUMMARY_SCREEN', {
-    //   checkup,
-    // });
+    // @ts-ignore
+    this.props.navigation.push('CHECKUP_SUMMARY_SCREEN', {
+      checkup,
+    });
   };
 
   navigateToPredictionViewer = async (prediction: Prediction) => {

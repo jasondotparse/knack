@@ -11,6 +11,7 @@ import theme from "./theme";
 import { Feather } from "@expo/vector-icons";
 import { find } from "lodash";
 import distortions, { CognitiveDistortion } from "./distortions";
+import shadowStyle from "./shadowStyle";
 
 export interface ParentComponent {
   children: any;
@@ -434,6 +435,7 @@ export const RoundedSelector = ({
       return (
         <SelectorTextItem
           key={slug}
+          // @ts-ignore
           emoji={cogDistortion.emoji || "🍎"}
           text={cogDistortion.label}
           description={cogDistortion.description}
@@ -602,4 +604,26 @@ export const LI = ({ children }: any) => (
       marginBottom: 4,
     }}
   >{`\u2022 ${children}`}</Text>
+);
+
+export const FloatingCard = ({
+  children,
+  style,
+}: {
+  children: any;
+  style?: any;
+}) => (
+  <View
+    style={{
+      backgroundColor: "white",
+      borderWidth: 1,
+      borderColor: theme.lightGray,
+      borderRadius: 8,
+      padding: 24,
+      ...shadowStyle,
+      ...style,
+    }}
+  >
+    {children}
+  </View>
 );
