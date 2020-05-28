@@ -8,6 +8,7 @@ import LearnScreen from './src/learn';
 import TabBar from './src/tabBar/TabBar';
 import MarkdownArticleScreen from './src/articles/MarkdownArticleScreen'
 import CheckUpSummaryScreen from './src/checkups';
+import LockScreen from './src/lock/LockScreen';
 
 const App = createBottomTabNavigator(
   {
@@ -16,6 +17,7 @@ const App = createBottomTabNavigator(
     'LEARN_SCREEN': LearnScreen,
     'MARKDOWN_ARTICLE_SCREEN': MarkdownArticleScreen,
     'CHECKUP_SCREEN': CheckUpSummaryScreen,
+    'LOCK_SCREEN': LockScreen,
   },
   {
     initialRouteName: 'MAIN_SCREEN',

@@ -13,6 +13,7 @@ import { FadesIn, BouncyBigOnActive } from "../animations";
 import { isCorrectPincode, setPincode } from "./lockstore";
 import { get } from "lodash";
 import haptic from "../haptic";
+import { StackNavigationOptions } from "react-navigation-stack/lib/typescript/src/vendor/types";
 
 interface ScreenProps {
   navigation: NavigationScreenProp<NavigationState, NavigationAction>;
@@ -76,8 +77,8 @@ export default class extends React.Component<
     code: string;
   }
 > {
-  static navigationOptions = {
-    header: null,
+  static navigationOptions: StackNavigationOptions = {
+    header: () => <></>,
   };
 
   state = {

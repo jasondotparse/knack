@@ -11,18 +11,23 @@ import theme from "./theme";
 import { ScrollView } from 'react-native-gesture-handler';
 import Constants from "expo-constants";
 import { Container, Row, SubHeader, Paragraph, RoundedSelectorButton, ActionButton } from './ui';
+import { hasPincode, removePincode } from "./lock/lockstore";
 
 interface Props {
   navigation: NavigationScreenProp<NavigationState, NavigationAction>;
 }
 
 interface State {
-
+  pincodeSet: boolean
 }
 
 class SettingScreen extends React.Component<Props, State> {
   static navigationOptions: StackNavigationOptions = {
     header: () =>  <Text>header goes here</Text>
+  }
+
+  state = {
+    pincodeSet: false,
   }
 
   render() {
@@ -98,7 +103,7 @@ class SettingScreen extends React.Component<Props, State> {
               <ActionButton
                 flex={1}
                 title={
-                  true
+                  this.state.pincodeSet
                     ? "Reset Pincode"
                     : "Set Pincode"
                 }
@@ -110,10 +115,15 @@ class SettingScreen extends React.Component<Props, State> {
                   borderBottomWidth: 0,
                 }}
                 onPress={() => {
-
+                  this.props.navigation.navigate('LOCK_SCREEN', {
+                    isSettingCode: true,
+                  });
+                  this.setState({
+                    pincodeSet: true,
+                  });
                 }}
               />
-              {false && (
+              {this.state.pincodeSet && (
                 <ActionButton
                   flex={1}
                   title={"Remove Pincode"}
@@ -126,7 +136,10 @@ class SettingScreen extends React.Component<Props, State> {
                     marginTop: 6,
                   }}
                   onPress={async () => {
-
+                    await removePincode();
+                    this.setState({
+                      pincodeSet: false,
+                    });
                   }}
                 />
               )}
