@@ -1,262 +1,35 @@
-import React from "react";
-import { ScrollView, StatusBar, Platform } from "react-native";
-import theme from "./theme";
-import { Linking } from "expo";
-import Constants from "expo-constants";
-import {
-  Row,
-  Container,
-  SubHeader,
-  Paragraph,
-  RoundedSelectorButton,
-  B,
-  ActionButton,
-} from "./ui";
+import React from 'react';
 import {
   NavigationScreenProp,
   NavigationState,
   NavigationAction,
 } from "react-navigation";
-import { setSetting, getSettingOrSetDefault } from "./setting/settingstore";
-import {
-  HISTORY_BUTTON_LABEL_KEY,
-  HISTORY_BUTTON_LABEL_DEFAULT,
-  HistoryButtonLabelSetting,
-  isHistoryButtonLabelSetting,
-} from "./setting";
-// @ts-ignore
-import OneSignal from "react-native-onesignal";
-// @ts-ignore
-import { FadesIn } from "./animations";
-import dayjs from "dayjs";
-import { hasPincode, removePincode } from "./lock/lockstore";
-
-export { HistoryButtonLabelSetting };
-
-// Exportable settings
-export async function getHistoryButtonLabel(): Promise<
-  HistoryButtonLabelSetting
-> {
-  const value = await getSettingOrSetDefault(
-    HISTORY_BUTTON_LABEL_KEY,
-    HISTORY_BUTTON_LABEL_DEFAULT
-  );
-
-  if (!isHistoryButtonLabelSetting(value)) {
-    console.error(
-      `Something went wrong getting ${HISTORY_BUTTON_LABEL_KEY}. Got: "${value}"`
-    );
-    return HISTORY_BUTTON_LABEL_DEFAULT;
-  }
-
-  return value;
-}
-
-const Feedback = () => (
-  <>
-    <SubHeader>*feedback</SubHeader>
-    <Paragraph
-      style={{
-        marginBottom: 16,
-      }}
-    >
-      We take your feedback extremely seriously. The email below goes directly
-      to the creators of Quirk.
-    </Paragraph>
-    <ActionButton
-      flex={1}
-      title={"Email Feedback"}
-      fillColor="#EDF0FC"
-      textColor={theme.darkBlue}
-      style={{
-        borderWidth: 0,
-        borderBottomWidth: 0,
-      }}
-      width={"100%"}
-      onPress={() => {
-        Linking.openURL(
-          "mailto:humans@quirk.fyi?subject=" + encodeURI("Quirk Feedback")
-        );
-      }}
-    />
-  </>
-);
-
-const CancelationInstructions = () => {
-  return (
-    <ActionButton
-      flex={1}
-      title={"Cancellation Instructions"}
-      fillColor="#EDF0FC"
-      textColor={theme.darkBlue}
-      style={{
-        borderWidth: 0,
-        borderBottomWidth: 0,
-      }}
-      onPress={() => {
-        if (Platform.OS === "android") {
-          Linking.openURL(
-            "https://support.google.com/googleplay/answer/7018481"
-          );
-        } else {
-          Linking.openURL("https://support.apple.com/en-us/HT202039");
-        }
-      }}
-    />
-  );
-};
-
-const GrandfatheredInFreeQuirk = () => (
-  <>
-    <Paragraph
-      style={{
-        marginBottom: 4,
-      }}
-    >
-      <B>You've been given Quirk for free! 🙌</B>
-    </Paragraph>
-    <Paragraph
-      style={{
-        marginBottom: 49,
-      }}
-    >
-      This will go away if you uninstall the app. Feel free to reach out by
-      email ({"ejc" + "@" + "quirk.fyi"}) if you get a new phone; we'll work
-      something out. Thanks for being an early supporter! ❤️
-    </Paragraph>
-  </>
-);
-
-const SubscriptionExpirationDate = ({ expirationDate }: any) => (
-  <>
-    <Row>
-      <Paragraph
-        style={{
-          marginBottom: 16,
-        }}
-      >
-        Thanks for supporting the development of Quirk!
-      </Paragraph>
-    </Row>
-    <Row
-      style={{
-        marginBottom: 16,
-      }}
-    >
-      <Paragraph>
-        You're currently subscribed. On{" "}
-        <B>{dayjs(expirationDate).format("YYYY-MM-DD")}</B> your subscription
-        will renew.
-      </Paragraph>
-    </Row>
-
-    <Row
-      style={{
-        marginBottom: 16,
-      }}
-    >
-      <CancelationInstructions />
-    </Row>
-  </>
-);
+import { Text, StatusBar } from 'react-native';
+import { StackNavigationOptions } from "react-navigation-stack/lib/typescript/src/vendor/types";
+import { FadesIn } from './animations';
+import theme from "./theme";
+import { ScrollView } from 'react-native-gesture-handler';
+import Constants from "expo-constants";
+import { Container, Row, SubHeader, Paragraph, RoundedSelectorButton, ActionButton } from './ui';
 
 interface Props {
   navigation: NavigationScreenProp<NavigationState, NavigationAction>;
 }
 
 interface State {
-  isReady: boolean;
-  historyButtonLabel?: HistoryButtonLabelSetting;
-  isGrandfatheredIntoSubscription?: boolean;
-  subscriptionExpirationDate?: string;
-  areNotificationsOn?: boolean;
-  shouldShowRemovePincode?: boolean;
+
 }
 
 class SettingScreen extends React.Component<Props, State> {
-  static navigationOptions = {
-    header: null,
-  };
-
-  constructor(props: any) {
-    super(props);
-    this.state = {
-      isReady: false,
-      isGrandfatheredIntoSubscription: false,
-      areNotificationsOn: false,
-      shouldShowRemovePincode: false,
-    };
-    recordScreenCallOnFocus(this.props.navigation, "settings");
+  static navigationOptions: StackNavigationOptions = {
+    header: () =>  <Text>header goes here</Text>
   }
-
-  async componentDidMount() {
-    OneSignal.init('dummy', {
-      kOSSettingsKeyAutoPrompt: false,
-      kOSSettingsKeyInFocusDisplayOption: 0,
-    });
-    await this.refresh();
-  }
-
-  refresh = async () => {
-    const historyButtonLabel = await getHistoryButtonLabel();
-    const shouldShowRemovePincode = await hasPincode();
-    this.setState({
-      historyButtonLabel,
-      shouldShowRemovePincode,
-    });
-
-    // Check subscription status
-    if (true) {
-      this.setState({
-        isGrandfatheredIntoSubscription: true,
-      });
-    }
-
-    // Check notification status
-    OneSignal.getPermissionSubscriptionState((status: any) => {
-      this.setState({
-        areNotificationsOn: !!status.subscriptionEnabled,
-        isReady: true,
-      });
-    });
-  };
-
-  navigateToList = () => {
-    // this.props.navigation.pop();
-  };
-
-  navigateToOnboardingScreen = () => {
-    this.props.navigation.navigate('CBT_ON_BOARDING_SCREEN');
-  };
-
-  toggleHistoryButtonLabels = () => {
-    if (!this.state.isReady) {
-      this.refresh();
-      return;
-    }
-
-    if (this.state.historyButtonLabel === "alternative-thought") {
-      setSetting<HistoryButtonLabelSetting>(
-        HISTORY_BUTTON_LABEL_KEY,
-        "automatic-thought"
-      );
-      this.refresh();
-    } else {
-      setSetting<HistoryButtonLabelSetting>(
-        HISTORY_BUTTON_LABEL_KEY,
-        "alternative-thought"
-      );
-      this.refresh();
-    }
-  };
 
   render() {
-    const { isReady } = this.state;
-
     return (
       <FadesIn
         style={{ backgroundColor: theme.lightOffwhite }}
-        pose={isReady ? "visible" : "hidden"}
+        pose={'visible'}
       >
         <ScrollView
           style={{
@@ -290,26 +63,17 @@ class SettingScreen extends React.Component<Props, State> {
               </Paragraph>
               <RoundedSelectorButton
                 title={"Please remind me"}
-                selected={this.state.areNotificationsOn}
+                selected={true}
                 onPress={() => {
-                  if (Platform.OS === "ios") {
-                    OneSignal.registerForPushNotifications();
-                  }
-                  OneSignal.setSubscription(true);
-                  this.setState({
-                    areNotificationsOn: true,
-                  });
+
                 }}
               />
 
               <RoundedSelectorButton
                 title={"No reminders, thanks"}
-                selected={!this.state.areNotificationsOn}
+                selected={false}
                 onPress={() => {
-                  OneSignal.setSubscription(false);
-                  this.setState({
-                    areNotificationsOn: false,
-                  });
+
                 }}
               />
             </Row>
@@ -334,7 +98,7 @@ class SettingScreen extends React.Component<Props, State> {
               <ActionButton
                 flex={1}
                 title={
-                  this.state.shouldShowRemovePincode
+                  true
                     ? "Reset Pincode"
                     : "Set Pincode"
                 }
@@ -346,15 +110,10 @@ class SettingScreen extends React.Component<Props, State> {
                   borderBottomWidth: 0,
                 }}
                 onPress={() => {
-                  this.props.navigation.navigate('LOCK_SCREEN', {
-                    isSettingCode: true,
-                  });
-                  this.setState({
-                    shouldShowRemovePincode: true,
-                  });
+
                 }}
               />
-              {this.state.shouldShowRemovePincode && (
+              {false && (
                 <ActionButton
                   flex={1}
                   title={"Remove Pincode"}
@@ -367,10 +126,7 @@ class SettingScreen extends React.Component<Props, State> {
                     marginTop: 6,
                   }}
                   onPress={async () => {
-                    await removePincode();
-                    this.setState({
-                      shouldShowRemovePincode: false,
-                    });
+
                   }}
                 />
               )}
@@ -383,7 +139,7 @@ class SettingScreen extends React.Component<Props, State> {
                 flexDirection: "column",
               }}
             >
-              <Feedback />
+
             </Row>
 
             <Row
@@ -393,20 +149,13 @@ class SettingScreen extends React.Component<Props, State> {
                 flexDirection: "column",
               }}
             >
-              <SubHeader>*subscription</SubHeader>
-              {this.state.isGrandfatheredIntoSubscription ? (
-                <GrandfatheredInFreeQuirk />
-              ) : (
-                <SubscriptionExpirationDate
-                  expirationDate={this.state.subscriptionExpirationDate}
-                />
-              )}
             </Row>
           </Container>
         </ScrollView>
       </FadesIn>
     );
   }
+
 }
 
 export default SettingScreen;

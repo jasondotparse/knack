@@ -2,7 +2,7 @@ import React from 'react';
 import { createAppContainer } from "react-navigation";
 import { StyleSheet, Text, View } from 'react-native';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
-import SettingScreen from './src/settings';
+import SettingScreen from './src/SettingsScreen';
 import MainScreen from './src/main';
 import LearnScreen from './src/learn';
 import TabBar from './src/tabBar/TabBar';
