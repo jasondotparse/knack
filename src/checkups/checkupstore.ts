@@ -17,8 +17,8 @@ export interface Checkup {
   updatedAt: Date;
 }
 
-const CHECKUP_SCHEDULE_KEY = "@Quirk:next-checkup-date";
-const CHECKUP_KEY_PREFIX = `@Quirk:checkups:`;
+const CHECKUP_SCHEDULE_KEY = "@Knack:next-checkup-date";
+const CHECKUP_KEY_PREFIX = `@Knack:checkups:`;
 
 function getKey(uuid: string) {
   return CHECKUP_KEY_PREFIX + uuid;

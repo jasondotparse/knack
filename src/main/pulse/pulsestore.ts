@@ -5,8 +5,8 @@ import { pushScore, getCompleteHistory } from "./score";
 import { Boost } from "./constants";
 import { passesFeatureFlag } from "../../featureflags";
 
-const KEY_PULSE_HISTORY = `@Quirk:pulse:history`;
-const KEY_BOOST_QUEUE = `@Quirk:pulse:boost-queue`;
+const KEY_PULSE_HISTORY = `@Knack:pulse:history`;
+const KEY_BOOST_QUEUE = `@Knack:pulse:boost-queue`;
 
 export async function getPulseHistory(): Promise<PulseStamp[]> {
   try {

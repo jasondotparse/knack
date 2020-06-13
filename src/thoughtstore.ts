@@ -5,8 +5,8 @@ import dayjs from "dayjs";
 import parseThoughts from "./main/parseThoughts";
 import { uuid } from './utils';
 
-const EXISTING_USER_KEY = "@Quirk:existing-user";
-const THOUGHTS_KEY_PREFIX = `@Quirk:thoughts:`;
+const EXISTING_USER_KEY = "@Knack:existing-user";
+const THOUGHTS_KEY_PREFIX = `@Knack:thoughts:`;
 
 export function getThoughtKey(info: any): string {
   return THOUGHTS_KEY_PREFIX + info;

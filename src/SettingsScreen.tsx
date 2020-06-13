@@ -27,7 +27,7 @@ class SettingScreen extends React.Component<Props, State> {
   }
 
   state = {
-    pincodeSet: false,
+    pincodeSet: false
   }
 
   render() {
@@ -50,7 +50,8 @@ class SettingScreen extends React.Component<Props, State> {
             }}
           >
             <StatusBar barStyle="dark-content" hidden={false} />
-            <Row
+            {/* todo: add reminders using push notifications */}
+            {/* <Row
               style={{
                 marginBottom: 22,
                 display: "flex",
@@ -81,7 +82,7 @@ class SettingScreen extends React.Component<Props, State> {
 
                 }}
               />
-            </Row>
+            </Row> */}
 
             <Row
               style={{

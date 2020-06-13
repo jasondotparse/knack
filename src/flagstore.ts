@@ -5,7 +5,7 @@
 
 import { AsyncStorage } from "react-native";
 
-const FLAG_KEY = "@Quirk:flags";
+const FLAG_KEY = "@Knack:flags";
 
 // This isn't a regular boolean because we
 // store things in strings

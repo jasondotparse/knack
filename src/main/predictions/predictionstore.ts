@@ -29,7 +29,7 @@ export function newPrediction() {
   };
 }
 
-const PREDICTION_KEY_PREFIX = `@Quirk:predictions:`;
+const PREDICTION_KEY_PREFIX = `@Knack:predictions:`;
 
 function getKey(uuid: string) {
   return PREDICTION_KEY_PREFIX + uuid;

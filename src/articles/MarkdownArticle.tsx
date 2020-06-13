@@ -155,8 +155,6 @@ export default class MarkdownArticle extends React.Component<
   };
 
   render() {
-    // Don't start the progress bar at absolute 0 or you'll chop the head
-    // off the little Quirk bubble 😱
     const progress = clamp(
       (this.state.index / (this.props.pages.length - 1)) * 100,
       20,

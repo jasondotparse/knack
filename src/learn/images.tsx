@@ -90,9 +90,9 @@ export const ShouldStatementsImage = () => (
   />
 );
 
-export const HowToQuirkImage = () => (
+export const HowToKnackImage = () => (
   <Image
-    source={require("../../assets/learnheaders/HowToQuirk.png")}
+    source={require("../../assets/learnheaders/HowToKnack.png")}
     style={ImageStyles}
   />
 );

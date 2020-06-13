@@ -10,9 +10,9 @@ import {
   CardTitleAndSubtitleContent,
 } from "../card/TouchableCard";
 import Content from "../articles/Content";
-import { HowToQuirkImage } from "./images";
+import { HowToKnackImage } from "./images";
 import cbt101 from "../articles/content/cbt101";
-import howToUseQuirk from "../articles/content/howToUseQuirk";
+import howToUseKnack from "../articles/content/howToUseKnack";
 import allOrNothing from "../articles/content/all-or-nothing";
 import catastrophizing from "../articles/content/catastrophizing";
 import emotionalReasoning from "../articles/content/emotional-reasoning";
@@ -43,7 +43,7 @@ const ArticleWithImageCard = ({
         borderColor: theme.lightGray,
       }}
     >
-      <HowToQuirkImage />
+      <HowToKnackImage />
     </View>
     <CardTitleAndSubtitleContent
       title={content.title}
@@ -108,7 +108,7 @@ export default class LearnScreen extends React.Component<ScreenProps> {
 
           <SubHeader>Start Here</SubHeader>
           <ArticleWithImageCard content={cbt101} onPress={this._openContent} />
-          <ArticleCard content={howToUseQuirk} onPress={this._openContent} />
+          <ArticleCard content={howToUseKnack} onPress={this._openContent} />
 
           <SubHeader>Cognitive Distortions</SubHeader>
           <ArticleCard content={allOrNothing} onPress={this._openContent} />

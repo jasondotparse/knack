@@ -52,7 +52,7 @@ These thoughts are _distorted_: they're not correct or logical. But these though
 
 By challenging your thoughts in the moment, you can learn to not immediately buy any automatic negative thought that comes in. It requires practice, but it can help you become more mentally resilient and feel better overall.
 
-Quirk is built to help you challenge thoughts. **Read "How to use Quirk" to learn more.**
+Knack is built to help you challenge thoughts. **Read "How to use Knack" to learn more.**
 `,
 ];
 

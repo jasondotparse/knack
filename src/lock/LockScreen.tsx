@@ -132,6 +132,7 @@ export default class extends React.Component<
     }
 
     const isGood = await isCorrectPincode(this.state.code);
+    
     if (isGood) {
       haptic.notification(Haptic.NotificationFeedbackType.Success);
       this.props.navigation.navigate('MAIN_SCREEN');

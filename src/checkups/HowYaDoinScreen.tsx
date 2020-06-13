@@ -130,7 +130,7 @@ export default class HowYaDoinScreen extends React.Component<
                 marginBottom: 24,
               }}
             >
-              Be honest, Quirk adapts based on how you're doing.
+              Be honest, Knack adapts based on how you're doing.
             </HintHeader>
 
             <RoundedSelectorButton
