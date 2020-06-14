@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "knack",
-    "slug": "expo.io/@holtkam2/knack",
+    "name": "knack CBT",
+    "slug": "knack",
     "platforms": [
       "ios",
       "android",
