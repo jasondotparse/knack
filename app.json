@@ -25,7 +25,8 @@
       "icon": "./assets/ios.png"
     },
     "android": {
-      "icon": "./assets/android.png"
+      "icon": "./assets/android.png",
+      "permissions": []
     },
     "description": "",
     "githubUrl": "https://github.com/holtkam2/knack"
