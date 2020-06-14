@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "knack",
-    "slug": "knack",
+    "slug": "expo.io/@holtkam2/knack",
     "platforms": [
       "ios",
       "android",
@@ -21,12 +21,16 @@
       "**/*"
     ],
     "ios": {
+      "bundleIdentifier": "com.wigit.knack",
+      "buildNumber": "1.0.0",
       "supportsTablet": true,
       "icon": "./assets/ios.png"
     },
     "android": {
+      "package": "com.wigit.knack",
       "icon": "./assets/android.png",
-      "permissions": []
+      "permissions": [],
+      "versionCode": 1
     },
     "description": "",
     "githubUrl": "https://github.com/holtkam2/knack"
