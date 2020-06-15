@@ -135,7 +135,7 @@ export default class MainScreen extends React.Component<
           justifyContent: "space-between",
         }}
       >
-        <StatusBar barStyle="dark-content" hidden={false} />
+        <StatusBar barStyle="dark-content" backgroundColor={theme.lightOffwhite} hidden={false} />
 
         <InvertibleScrollView
           inverted

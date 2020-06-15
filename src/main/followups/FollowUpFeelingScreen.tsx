@@ -88,7 +88,7 @@ export default class FollowUpFeelingScreen extends React.Component<
           flex: 1,
         }}
       >
-        <StatusBar barStyle="dark-content" hidden={false} />
+        <StatusBar barStyle="dark-content" backgroundColor={theme.lightOffwhite} hidden={false} />
 
         <SubHeader
           style={{

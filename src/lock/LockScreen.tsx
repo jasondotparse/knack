@@ -170,7 +170,7 @@ export default class extends React.Component<
         }}
         pose={this.state.isReady ? "visible" : "hidden"}
       >
-        <StatusBar barStyle="dark-content" hidden={false} />
+        <StatusBar barStyle="dark-content" backgroundColor={theme.lightOffwhite} hidden={false} />
         <Container
           style={{
             flex: 1,

@@ -135,7 +135,7 @@ export default class FeelingScreen extends React.Component<
           justifyContent: "center",
         }}
       >
-        <StatusBar barStyle="dark-content" hidden={false} />
+        <StatusBar barStyle="dark-content" backgroundColor={theme.lightOffwhite} hidden={false} />
         <MediumHeader
           style={{
             marginBottom: 24,

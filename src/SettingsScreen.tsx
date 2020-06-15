@@ -49,7 +49,7 @@ class SettingScreen extends React.Component<Props, State> {
               paddingBottom: 128,
             }}
           >
-            <StatusBar barStyle="dark-content" hidden={false} />
+            <StatusBar barStyle="dark-content" backgroundColor={theme.lightOffwhite} hidden={false} />
             {/* todo: add reminders using push notifications */}
             {/* <Row
               style={{
