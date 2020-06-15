@@ -63,9 +63,10 @@ export default class Feed extends React.Component<
   };
 
   loadShouldPromptCheckup = async () => {
-    const date = await getNextCheckupDate();
+    const nextCheckupDate = await getNextCheckupDate();
+
     this.setState({
-      shouldPromptCheckup: dayjs().isAfter(dayjs(date)),
+      shouldPromptCheckup: dayjs().isAfter(dayjs(nextCheckupDate)),
     });
   };
 

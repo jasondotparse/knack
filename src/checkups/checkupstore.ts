@@ -1,6 +1,6 @@
 import { AsyncStorage } from "react-native";
 import stringify from "json-stringify-safe";
-import Sentry from "../sentry";
+// import Sentry from "../sentry";
 // import { v4 as uuidv4 } from 'uuid';
 import { uuid } from '../utils';
 import dayjs from "dayjs";
@@ -43,7 +43,7 @@ export async function saveCheckup(checkup: Checkup) {
 
     await AsyncStorage.setItem(getKey(checkup.uuid), stringify(checkup));
   } catch (err) {
-    Sentry.captureException(err);
+
   }
 }
 
@@ -55,7 +55,7 @@ export async function getCheckup(uuid: string): Promise<any> {
       return checkup;
     }
   } catch (err) {
-    Sentry.captureException(err);
+
     return null;
   }
 }
@@ -72,7 +72,7 @@ export async function getOrderedCheckups(): Promise<Checkup[]> {
       dayjs(a.date).isAfter(dayjs(b.date)) ? 1 : -1
     );
   } catch (err) {
-    Sentry.captureException(err);
+
     return [];
   }
 }
@@ -86,7 +86,7 @@ export async function getMostRecentCheckup(): Promise<Checkup | null> {
 
     return orderedCheckups[0];
   } catch (err) {
-    Sentry.captureException(err);
+
     return null;
   }
 }
@@ -94,6 +94,7 @@ export async function getMostRecentCheckup(): Promise<Checkup | null> {
 export async function getNextCheckupDate(): Promise<string> {
   try {
     const date = await AsyncStorage.getItem(CHECKUP_SCHEDULE_KEY);
+
     if (!date) {
       // If we haven't had a checkup yet, schedule it for an hour ago
       return dayjs()
@@ -103,7 +104,6 @@ export async function getNextCheckupDate(): Promise<string> {
 
     return date;
   } catch (err) {
-    Sentry.captureException(err);
     return dayjs()
       .add(1, "week")
       .toISOString();
@@ -115,6 +115,6 @@ export async function saveNextCheckupDate(date: string) {
     const isoString = dayjs(date).toISOString();
     await AsyncStorage.setItem(CHECKUP_SCHEDULE_KEY, isoString);
   } catch (err) {
-    Sentry.captureException(err);
+
   }
 }

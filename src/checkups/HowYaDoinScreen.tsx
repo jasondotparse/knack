@@ -28,7 +28,7 @@ import { textInputStyle, textInputPlaceholderColor } from "../textInputStyle";
 import { get } from "lodash";
 import dayjs from "dayjs";
 import { scheduleBoost } from "../main/pulse/pulsestore";
-// import { COMPLETE_CHECKUP, FELT_BETTER } from "../main/pulse/constants";
+import { COMPLETE_CHECKUP, FELT_BETTER } from "../main/pulse/constants";
 
 export default class HowYaDoinScreen extends React.Component<
   ScreenProps,
@@ -65,15 +65,18 @@ export default class HowYaDoinScreen extends React.Component<
     haptic.notification(Haptic.NotificationFeedbackType.Success);
     await saveCheckup(this.state.checkup);
 
-    // await scheduleBoost(COMPLETE_CHECKUP);
-    // if (this.state.checkup.currentMood === "good") {
-    //   await scheduleBoost(FELT_BETTER);
-    // }
+    await scheduleBoost(COMPLETE_CHECKUP);
+
+    if (this.state.checkup.currentMood === "good") {
+      await scheduleBoost(FELT_BETTER);
+    }
 
     const nextCheckupDate = dayjs()
       .add(1, "week")
       .toISOString();
+
     await saveNextCheckupDate(nextCheckupDate);
+
     // scheduleNotification(nextCheckupDate, CHECKUP_ONESIGNAL_TEMPLATE);
 
     if (this.state.checkup.currentMood === "bad") {
@@ -125,13 +128,6 @@ export default class HowYaDoinScreen extends React.Component<
             }}
           >
             <MediumHeader>How has it been going?</MediumHeader>
-            <HintHeader
-              style={{
-                marginBottom: 24,
-              }}
-            >
-              Be honest, Knack adapts based on how you're doing.
-            </HintHeader>
 
             <RoundedSelectorButton
               title="It's going well 👍"
