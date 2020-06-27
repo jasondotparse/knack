@@ -96,7 +96,6 @@ export default class PredictionFollowUpScheduleScreen extends React.Component<
 
     userScheduledPredictionFollowUp(this.state.followUpOn);
 
-    await scheduleBoost(START_PREDICTION);
     // @ts-ignore   
     if (prediction.predictedExperience === "bad") {
       this.props.navigation.navigate('PREDICTION_REDIRECT_SCREEN', {

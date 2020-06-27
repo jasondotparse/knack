@@ -18,6 +18,7 @@ import PredictionFollowUpScreen from './predictions/PredictionFollowUpScreen';
 import PredictionFollowUpScheduleScreen from './predictions/PredictionFollowUpScheduleScreen';
 import FollowUpNoteScreen from './followups/FollowUpNoteScreen';
 import CheckupSummaryScreen from '../checkups/CheckupSummaryScreen';
+import PredictionThoughtRedirectScreen from './predictions/PredictionThoughtRedirectScreen';
 
 export default createStackNavigator(
   {
@@ -40,7 +41,8 @@ export default createStackNavigator(
     'PREDICTION_SUMMARY_SCREEN': PredictionSummaryScreen,
     'ASSUMPTION_NOTE_SCREEN': AssumptionNoteScreen,
     'PREDICTION_FOLLOW_UP_SCREEN': PredictionFollowUpScreen,
-    'PREDICTION_FOLLOW_UP_SCHEDULE_SCREEN': PredictionFollowUpScheduleScreen
+    'PREDICTION_FOLLOW_UP_SCHEDULE_SCREEN': PredictionFollowUpScheduleScreen,
+    'PREDICTION_REDIRECT_SCREEN': PredictionThoughtRedirectScreen
   },
   {
     initialRouteName: 'THOUGHT_SCREEN',
